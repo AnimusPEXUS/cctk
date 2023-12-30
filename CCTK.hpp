@@ -1,9 +1,14 @@
 #ifndef CCTK_HPP
 #define CCTK_HPP
 
+#include "SystemI.hpp"
+
+#include "KeyboardI.hpp"
+#include "PointerI.hpp"
+
 namespace wayround_i2p
 {
-namespace CCTK
+namespace cctk
 {
 
     class CCTK
@@ -13,7 +18,12 @@ namespace CCTK
 
         ~CCTK();
 
-        std::shared_ptr<CCTK> createWindow();
+        int setSystem(std::shared_ptr<SystemI> sys);
+
+        std::shared_ptr<WindowI> createWindow();
+
+        std::shared_ptr<KeyboardI> getKeyboard();
+        std::shared_ptr<PointerI>  getPointer();
 
       protected:
         CCTK();
@@ -22,7 +32,7 @@ namespace CCTK
         std::shared_ptr<SystemI> system;
     };
 
-} // namespace CCTK
+} // namespace cctk
 } // namespace wayround_i2p
 
 #endif

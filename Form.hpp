@@ -3,7 +3,7 @@
 
 namespace wayround_i2p
 {
-namespace CCTK
+namespace cctk
 {
 
     class Form
@@ -17,11 +17,10 @@ namespace CCTK
         Form();
 
       private:
-	
-	std::shared_ptr<WidgetI> child;
+        std::shared_ptr<WidgetI> child;
     };
 
-} // namespace CCTK
+} // namespace cctk
 } // namespace wayround_i2p
 
 #endif

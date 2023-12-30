@@ -3,7 +3,7 @@
 
 namespace wayround_i2p
 {
-namespace CCTK
+namespace cctk
 {
 
     class WidgetI
@@ -16,7 +16,7 @@ namespace CCTK
       private:
     };
 
-} // namespace CCTK
+} // namespace cctk
 } // namespace wayround_i2p
 
 #endif

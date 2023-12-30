@@ -21,33 +21,38 @@ pkg_check_modules(sigc REQUIRED IMPORTED_TARGET sigc++-3.0)
 
 find_package(ICU 73.0 COMPONENTS uc i18n REQUIRED)
 
+add_subdirectory(types)
+add_subdirectory(interfaces)
+add_subdirectory(utils)
+
 add_library(
 	cctk 
 	CCTK.cpp
-	WindowI.cpp
-	SystemI.cpp
-	WidgetI.cpp
 	Widget.cpp
 	Form.cpp
 	Button.cpp
-	# Label.cpp
-	# TextEntry.cpp
     )
 
 target_link_libraries(
-    cctk 
-    PUBLIC 
-    PkgConfig::sigc 
-    Boost::json
-    Boost::regex
-    ICU::uc 
-    ICU::i18n
+	cctk 
+	PUBLIC 
+	PkgConfig::sigc 
+	Boost::json
+	Boost::regex
+	ICU::uc 
+	ICU::i18n
+	cctk_types
+	cctk_interfaces
+	cctk_utils
     )
 
 target_include_directories(
-    cctk 
-    PUBLIC 
-    ${Boost_INCLUDE_DIRS}
-    ${ICU_INCLUDE_DIRS}
+	cctk 
+	PUBLIC 
+	${Boost_INCLUDE_DIRS}
+	${ICU_INCLUDE_DIRS}
+	cctk_types
+	cctk_interfaces
+	cctk_utils
     )
 
