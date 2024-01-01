@@ -26,7 +26,7 @@ add_subdirectory(interfaces)
 add_subdirectory(utils)
 
 add_library(
-	cctk 
+	cctk
 	CCTK.cpp
 	Widget.cpp
 	Form.cpp
@@ -36,23 +36,25 @@ add_library(
 target_link_libraries(
 	cctk 
 	PUBLIC 
+	cctk_types
+	cctk_interfaces
+	cctk_utils
+	PRIVATE
 	PkgConfig::sigc 
 	Boost::json
 	Boost::regex
 	ICU::uc 
 	ICU::i18n
-	cctk_types
-	cctk_interfaces
-	cctk_utils
     )
 
 target_include_directories(
 	cctk 
 	PUBLIC 
-	${Boost_INCLUDE_DIRS}
+	types
+	interfaces
+	utils
+	PRIVATE
 	${ICU_INCLUDE_DIRS}
-	cctk_types
-	cctk_interfaces
-	cctk_utils
+	${Boost_INCLUDE_DIRS}
     )
 

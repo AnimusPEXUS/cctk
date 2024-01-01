@@ -28,21 +28,22 @@ add_subdirectory("${cctk_abs_path}" cctk_bin)
 add_library(
 	cctk_laf_memphis 
 	cctk_laf_memphis.cpp
-    )
+	)
 
 target_link_libraries(
-    cctk_laf_memphis 
-    PUBLIC 
-    PkgConfig::sigc 
-    ICU::uc 
-    ICU::i18n
+	cctk_laf_memphis 
+	PUBLIC 
+	PkgConfig::sigc 
+	ICU::uc 
+	ICU::i18n
 	cctk
-    )
+	)
 
 target_include_directories(
-    cctk_laf_memphis 
-    PUBLIC 
-    ${ICU_INCLUDE_DIRS}
-	cctk
-    )
+	cctk_laf_memphis 
+	PUBLIC 
+	${ICU_INCLUDE_DIRS}
+	.
+	"${cctk_abs_path}"
+	)
 

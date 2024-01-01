@@ -1,6 +1,8 @@
 #ifndef WIDGET_I_HPP
 #define WIDGET_I_HPP
 
+#include "interfaces.hpp"
+
 namespace wayround_i2p
 {
 namespace cctk
@@ -9,7 +11,7 @@ namespace cctk
     class WidgetI
     {
       public:
-        void redraw(std::shared_ptr<DrawingSurfaceI> dc) abstract;
+        virtual void redraw(std::shared_ptr<DrawingSurfaceI> dc) = 0;
 
       protected:
 

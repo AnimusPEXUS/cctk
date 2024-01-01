@@ -1,10 +1,12 @@
 #ifndef CCTK_HPP
 #define CCTK_HPP
 
-#include "SystemI.hpp"
+#include <memory>
 
-#include "KeyboardI.hpp"
-#include "PointerI.hpp"
+#include <unicode/unistr.h>
+
+#include "interfaces/interfaces.hpp"
+#include "types/types.hpp"
 
 namespace wayround_i2p
 {

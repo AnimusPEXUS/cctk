@@ -1,56 +1,16 @@
 #ifndef TYPES_HPP
 #define TYPES_HPP
 
-namespace wayround_i2p
-{
-namespace cctk
-{
+#include <cstdint>
+#include <stdfloat>
 
-    struct ColorRGB
-    {
-        ColorField r;
-        ColorField g;
-        ColorField b;
-    };
+#include "ColorField.hpp"
+#include "ColorRGB.hpp"
 
-    struct Point2d
-    {
-        unsigned int x;
-        unsigned int y;
-    };
+#include "Point2d.hpp"
 
-    struct Point2dStyle
-    {
-        ColorRGB color;
-    };
+#include "Line2d.hpp"
 
-    struct Line2d
-    {
-        Point2d point0;
-        Point2d point1;
-    };
-
-    struct Line2dStyle
-    {
-        ColorRGB color;
-    };
-
-    struct Rectangle2d
-    {
-        Point2d top_left;
-        Point2d bottom_right;
-
-        bool is_valid();
-
-        unsigned int calc_width();
-        unsigned int calc_height();
-    };
-
-    struct Rectangle2dStyle
-    {
-    };
-
-} // namespace cctk
-} // namespace wayround_i2p
+#include "Rectangle2d.hpp"
 
 #endif

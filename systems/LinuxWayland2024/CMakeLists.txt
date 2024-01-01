@@ -34,21 +34,22 @@ add_library(
     )
 
 target_link_libraries(
-    cctk_sys_linux_wayland_2024 
-    PUBLIC 
-    PkgConfig::sigc 
-    Boost::json
-    Boost::regex
-    ICU::uc 
-    ICU::i18n
+	cctk_sys_linux_wayland_2024 
+	PUBLIC 
+	PkgConfig::sigc 
+	Boost::json
+	Boost::regex
+	ICU::uc 
+	ICU::i18n
 	cctk
-    )
+	)
 
 target_include_directories(
-    cctk_sys_linux_wayland_2024 
-    PUBLIC 
-    ${Boost_INCLUDE_DIRS}
-    ${ICU_INCLUDE_DIRS}
-	cctk
-    )
+	cctk_sys_linux_wayland_2024 
+	PUBLIC 
+	${Boost_INCLUDE_DIRS}
+	${ICU_INCLUDE_DIRS}
+	"."
+	"${cctk_abs_path}"
+	)
 

@@ -1,5 +1,5 @@
-#ifndef TYPES_HPP
-#define TYPES_HPP
+#ifndef COLOR_FIELD_HPP
+#define COLOR_FIELD_HPP
 
 #include <cstdint>
 #include <stdfloat>

@@ -48,7 +48,8 @@ target_link_libraries(
 target_include_directories(
 	cctk_test_01
 	PUBLIC 
-	cctk 
-	cctk_sys_linux_wayland_2024
-	cctk_laf_memphis
+	"."
+	"${cctk_abs_path}"
+	"${cctk_sys_abs_path}"
+	"${cctk_laf_abs_path}"
 	)

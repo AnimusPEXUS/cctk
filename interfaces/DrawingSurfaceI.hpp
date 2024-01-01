@@ -1,10 +1,9 @@
 #ifndef DRAWING_SURFACE_I_HPP
 #define DRAWING_SURFACE_I_HPP
 
-#include <cstdint>
-#include <stdfloat>
+#include "interfaces.hpp"
 
-#include "types.hpp"
+#include "types/types.hpp"
 
 namespace wayround_i2p
 {
