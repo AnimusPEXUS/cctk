@@ -8,8 +8,8 @@ namespace cctk
     class SystemI
     {
     };
-} // namespace cctk
 
+} // namespace cctk
 } // namespace wayround_i2p
 
 #endif

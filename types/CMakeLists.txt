@@ -9,7 +9,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_library(
 	cctk_types
-	// ColorField.cpp
+	ColorField.cpp
 	)
 
 target_link_libraries(

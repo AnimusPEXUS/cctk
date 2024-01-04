@@ -23,6 +23,8 @@ namespace cctk
 
         virtual void setPosition(Point2d val) = 0;
 
+        virtual int show() = 0;
+
       protected:
 
       private:
