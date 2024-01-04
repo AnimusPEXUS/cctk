@@ -7,6 +7,8 @@ namespace cctk
 {
     class SystemI
     {
+      public:
+        virtual int init() = 0;
     };
 
 } // namespace cctk

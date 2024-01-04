@@ -27,6 +27,7 @@ namespace cctk
 
     int CCTK::init()
     {
+        system->init();
         return 0;
     }
 
@@ -37,6 +38,7 @@ namespace cctk
 
     int CCTK::setSystem(std::shared_ptr<SystemI> sys)
     {
+        system = sys;
         return 0;
     }
 

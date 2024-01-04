@@ -17,6 +17,8 @@ namespace cctk
 
         ~CCTKSysLinuxWayland2024();
 
+        int init() override;
+
       protected:
         CCTKSysLinuxWayland2024();
 

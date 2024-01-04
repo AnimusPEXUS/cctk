@@ -23,5 +23,10 @@ namespace cctk
     {
     }
 
+    int CCTKSysLinuxWayland2024::init()
+    {
+        return 0;
+    }
+
 } // namespace cctk
 } // namespace wayround_i2p
