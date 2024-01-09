@@ -1,19 +1,20 @@
 import os.path
 import datetime
 
+
 def edit_file(fullpath_first, fullpath):
 
     lns = []
 
     relp = os.path.relpath(fullpath, fullpath_first)
     print("editing: {}".format(relp))
-    
+
     with open(fullpath, 'r') as f:
         lns = f.readlines()
 
-    for i in range(len(lns)-1,-1,-1):
-        lns[i]=lns[i].rstrip()
-        
+    for i in range(len(lns)-1, -1, -1):
+        lns[i] = lns[i].rstrip()
+
     if len(lns) > 0:
         if lns[0].startswith('#ifndef'):
             del lns[0]
@@ -43,7 +44,7 @@ def edit_file(fullpath_first, fullpath):
             return
 
     a = datetime.datetime.utcnow()
-        
+
     gened_name = 'WAYROUND_{:04d}{:02d}{:02d}_{:02d}{:02d}{:02d}_{:d}'.format(
         a.year, a.month, a.day, a.hour, a.minute, a.second, a.microsecond
     )
@@ -55,12 +56,12 @@ def edit_file(fullpath_first, fullpath):
 
     with open(fullpath, 'w') as f:
         f.write("\n".join(lns))
-        
+
+
 def walk_dir(fullpath_first, fullpath):
 
     relp = os.path.relpath(fullpath, fullpath_first)
     print("working in: {}".format(relp))
-    
 
     names = os.listdir(fullpath)
 
@@ -82,13 +83,12 @@ def walk_dir(fullpath_first, fullpath):
             edit_file(fullpath_first, joined)
 
 
-
-
 def main():
     a = os.path.dirname(__file__)
     a = os.path.abspath(a)
     print(f"walking {a} dirs and replacing .hpp headers")
     walk_dir(a, a)
+
 
 if __name__ == '__main__':
     main()
