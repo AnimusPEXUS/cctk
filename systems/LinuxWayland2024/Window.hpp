@@ -1,5 +1,5 @@
-#ifndef CCTK_SYS_LINUX_WAYLAND_2024_HPP
-#define CCTK_SYS_LINUX_WAYLAND_2024_HPP
+#ifndef WINDOW_HPP
+#define WINDOW_HPP
 
 #include <memory>
 
@@ -14,24 +14,23 @@
 
 namespace wayround_i2p::cctk::system::linux_wayland_2024
 {
-namespace cctk_sys_linux_wayland_2024
+
+class Window : public WindowI
 {
-    class Window : public WindowI
-    {
-      public:
-        static std::shared_ptr<Window> create();
+  public:
+    static std::shared_ptr<Window> create();
 
-        ~Window();
+    ~Window();
 
-        int init() override;
-        int run() override;
+    int init() override;
+    int run() override;
 
-        std::shared_ptr<WindowI> createWindow() override;
+    std::shared_ptr<WindowI> createWindow() override;
 
-      protected:
-        Window();
-    };
+  protected:
+    Window();
+};
 
-} // namespace wayround_i2p
+} // namespace wayround_i2p::cctk::system::linux_wayland_2024
 
 #endif
