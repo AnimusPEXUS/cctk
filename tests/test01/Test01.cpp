@@ -2,7 +2,7 @@
 
 #include "CCTK.hpp"
 
-#include "systems/LinuxWayland2024/CCTKSysLinuxWayland2024.hpp"
+#include "systems/LinuxWayland2024/System.hpp"
 
 int main(int argc, char **args)
 {
@@ -11,7 +11,7 @@ int main(int argc, char **args)
 
     cctk->applyCmdLineArgs(argc, args);
 
-    auto sys = wayround_i2p::cctk::CCTKSysLinuxWayland2024::create();
+    auto sys = wayround_i2p::cctk::system::linux_wayland_2024::System::create();
 
     cctk->setSystem(sys);
 

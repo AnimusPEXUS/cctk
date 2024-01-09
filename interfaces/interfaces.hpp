@@ -4,15 +4,20 @@
 #include <cstdint>
 #include <stdfloat>
 
+class SystemI;
+class WindowI;
+class KeyboardI;
+class PointerI;
+
 #include "CCTK.hpp"
 
-#include "SystemI.hpp"
-#include "DrawingSurfaceI.hpp"
+#include "interfaces/DrawingSurfaceI.hpp"
+#include "interfaces/SystemI.hpp"
 
-#include "KeyboardI.hpp"
-#include "PointerI.hpp"
+#include "interfaces/KeyboardI.hpp"
+#include "interfaces/PointerI.hpp"
 
-#include "WindowI.hpp"
-#include "WidgetI.hpp"
+#include "interfaces/WidgetI.hpp"
+#include "interfaces/WindowI.hpp"
 
 #endif

@@ -3,27 +3,24 @@
 
 #include "types.hpp"
 
-namespace wayround_i2p
-{
-namespace cctk
+namespace wayround_i2p::cctk
 {
 
-    struct Rectangle2d
-    {
-        Point2d top_left;
-        Point2d bottom_right;
+struct Rectangle2d
+{
+    Point2d top_left;
+    Point2d bottom_right;
 
-        bool is_valid();
+    bool is_valid();
 
-        unsigned int calc_width();
-        unsigned int calc_height();
-    };
+    unsigned int calc_width();
+    unsigned int calc_height();
+};
 
-    struct Rectangle2dStyle
-    {
-    };
+struct Rectangle2dStyle
+{
+};
 
-} // namespace cctk
-} // namespace wayround_i2p
+} // namespace wayround_i2p::cctk
 
 #endif

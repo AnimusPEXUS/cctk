@@ -25,6 +25,5 @@ add_library(
 target_include_directories(
 	cctk_interfaces
 	INTERFACE
-	.
 	..
 	)

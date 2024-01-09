@@ -1,18 +1,20 @@
 #ifndef SYSTEM_I_HPP
 #define SYSTEM_I_HPP
 
-namespace wayround_i2p
-{
-namespace cctk
-{
-    class SystemI
-    {
-      public:
-        virtual int init() = 0;
-        virtual int run()  = 0;
-    };
+#include "WindowI.hpp"
 
-} // namespace cctk
-} // namespace wayround_i2p
+namespace wayround_i2p::cctk
+{
+
+class SystemI
+{
+  public:
+    virtual int init() = 0;
+    virtual int run()  = 0;
+
+    virtual std::shared_ptr<WindowI> createWindow() = 0;
+};
+
+} // namespace wayround_i2p::cctk
 
 #endif

@@ -37,9 +37,9 @@ add_subdirectory("${cctk_abs_path}" cctk_bin)
 
 add_library(
 	cctk_sys_linux_wayland_2024 
-	CCTKSysLinuxWayland2024.cpp
+	System.cpp
 	Window.cpp
-	DrawindSurface.cpp
+	DrawingSurface.cpp
     )
 
 target_link_libraries(
@@ -60,7 +60,6 @@ target_include_directories(
 	${Boost_INCLUDE_DIRS}
 	${ICU_INCLUDE_DIRS}
 	PkgConfig::waylandpp
-	"."
 	"${cctk_abs_path}"
 	)
 

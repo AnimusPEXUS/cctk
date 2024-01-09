@@ -9,44 +9,41 @@
 #include "interfaces/interfaces.hpp"
 #include "types/types.hpp"
 
-namespace wayround_i2p
-{
-namespace cctk
+namespace wayround_i2p::cctk
 {
 
-    class CCTK
-    {
-      public:
-        static std::shared_ptr<CCTK> create();
+class CCTK
+{
+  public:
+    static std::shared_ptr<CCTK> create();
 
-        ~CCTK();
+    ~CCTK();
 
-        int applyCmdLineArgs(int argc, char **args);
+    int applyCmdLineArgs(int argc, char **args);
 
-        int init();
-        int run();
+    int init();
+    int run();
 
-        int setSystem(std::shared_ptr<SystemI> sys);
+    int setSystem(std::shared_ptr<SystemI> sys);
 
-        std::shared_ptr<WindowI> createWindow();
+    std::shared_ptr<WindowI> createWindow();
 
-        std::shared_ptr<KeyboardI> getKeyboard();
-        std::shared_ptr<PointerI>  getPointer();
+    std::shared_ptr<KeyboardI> getKeyboard();
+    std::shared_ptr<PointerI>  getPointer();
 
-        std::weak_ptr<sigc::signal<void()>> get_sigAfterStart();
+    std::weak_ptr<sigc::signal<void()>> get_sigAfterStart();
 
-      protected:
-        CCTK();
+  protected:
+    CCTK();
 
-      private:
-        std::shared_ptr<SystemI> system;
+  private:
+    std::shared_ptr<SystemI> system;
 
-        std::shared_ptr<sigc::signal<void()>> sigAfterStart;
+    std::shared_ptr<sigc::signal<void()>> sigAfterStart;
 
-        bool running = false;
-    };
+    bool running = false;
+};
 
-} // namespace cctk
-} // namespace wayround_i2p
+} // namespace wayround_i2p::cctk
 
 #endif

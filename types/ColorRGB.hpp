@@ -3,19 +3,16 @@
 
 #include "types.hpp"
 
-namespace wayround_i2p
-{
-namespace cctk
+namespace wayround_i2p::cctk
 {
 
-    struct ColorRGB
-    {
-        ColorField r;
-        ColorField g;
-        ColorField b;
-    };
+struct ColorRGB
+{
+    ColorField r;
+    ColorField g;
+    ColorField b;
+};
 
-} // namespace cctk
-} // namespace wayround_i2p
+} // namespace wayround_i2p::cctk
 
 #endif

@@ -10,27 +10,24 @@
 
 #include "types.hpp"
 
-namespace wayround_i2p
-{
-namespace cctk
+namespace wayround_i2p::cctk
 {
 
-    class WindowI
-    {
-      public:
-        virtual void               setTitle(icu::UnicodeString val) = 0;
-        virtual icu::UnicodeString getTitle()                       = 0;
+class WindowI
+{
+  public:
+    virtual void               setTitle(icu::UnicodeString val) = 0;
+    virtual icu::UnicodeString getTitle()                       = 0;
 
-        virtual void setPosition(Point2d val) = 0;
+    virtual void setPosition(Point2d val) = 0;
 
-        virtual int show() = 0;
+    virtual int show() = 0;
 
-      protected:
+  protected:
 
-      private:
-    };
+  private:
+};
 
-} // namespace cctk
-} // namespace wayround_i2p
+} // namespace wayround_i2p::cctk
 
 #endif

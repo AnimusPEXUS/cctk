@@ -5,21 +5,17 @@
 
 #include "types/types.hpp"
 
-namespace wayround_i2p
-{
-namespace cctk
+namespace wayround_i2p::cctk
 {
 
-    class PointerI
-    {
-      public:
+class PointerI
+{
+  public:
 
-      protected:
+  protected:
 
-      private:
-    };
+  private:
+};
 
-} // namespace cctk
-} // namespace wayround_i2p
-
+} // namespace wayround_i2p::cctk
 #endif
