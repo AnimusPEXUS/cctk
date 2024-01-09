@@ -1,5 +1,5 @@
-#ifndef CCTK_HPP
-#define CCTK_HPP
+#ifndef WAYROUND_I2P_20240109_203545_243034
+#define WAYROUND_I2P_20240109_203545_243034
 
 #include <memory>
 

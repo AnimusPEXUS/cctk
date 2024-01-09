@@ -32,6 +32,8 @@ def edit_file(fullpath_first, fullpath):
     while len(lns) > 0:
         if lns[-1].isspace():
             del lns[-1]
+        else:
+            break
     
     if len(lns) > 0:
         if lns[-1].startswith('#endif'):
@@ -42,7 +44,7 @@ def edit_file(fullpath_first, fullpath):
 
     a = datetime.datetime.now(datetime.UTC)
 
-    gened_name = 'WAYROUND_{:04d}{:02d}{:02d}_{:02d}{:02d}{:02d}_{:d}'.format(
+    gened_name = 'WAYROUND_I2P_{:04d}{:02d}{:02d}_{:02d}{:02d}{:02d}_{:d}'.format(
         a.year, a.month, a.day, a.hour, a.minute, a.second, a.microsecond
     )
 

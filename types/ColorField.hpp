@@ -1,5 +1,5 @@
-#ifndef COLOR_FIELD_HPP
-#define COLOR_FIELD_HPP
+#ifndef WAYROUND_I2P_20240109_203545_246578
+#define WAYROUND_I2P_20240109_203545_246578
 
 #include <cstdint>
 #include <stdfloat>

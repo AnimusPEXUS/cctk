@@ -1,5 +1,5 @@
-#ifndef COLOR_RGB_HPP
-#define COLOR_RGB_HPP
+#ifndef WAYROUND_I2P_20240109_203545_246192
+#define WAYROUND_I2P_20240109_203545_246192
 
 #include "types.hpp"
 

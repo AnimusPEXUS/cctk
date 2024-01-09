@@ -1,5 +1,5 @@
-#ifndef WIDGET_I_HPP
-#define WIDGET_I_HPP
+#ifndef WAYROUND_I2P_20240109_203545_245903
+#define WAYROUND_I2P_20240109_203545_245903
 
 #include "interfaces.hpp"
 

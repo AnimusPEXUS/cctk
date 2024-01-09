@@ -1,5 +1,5 @@
-#ifndef WINDOW_I_HPP
-#define WINDOW_I_HPP
+#ifndef WAYROUND_I2P_20240109_203545_245358
+#define WAYROUND_I2P_20240109_203545_245358
 
 #include "types/ColorField.hpp"
 

@@ -1,5 +1,5 @@
-#ifndef TYPES_HPP
-#define TYPES_HPP
+#ifndef WAYROUND_I2P_20240109_203545_246947
+#define WAYROUND_I2P_20240109_203545_246947
 
 #include <cstdint>
 #include <stdfloat>

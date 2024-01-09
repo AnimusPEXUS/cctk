@@ -1,5 +1,5 @@
-#ifndef RECURSIONGUARD_HPP
-#define RECURSIONGUARD_HPP
+#ifndef WAYROUND_I2P_20240109_203545_243786
+#define WAYROUND_I2P_20240109_203545_243786
 
 #include <experimental/scope>
 #include <functional>

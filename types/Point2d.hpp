@@ -1,5 +1,5 @@
-#ifndef POINT_2D_HPP
-#define POINT_2D_HPP
+#ifndef WAYROUND_I2P_20240109_203545_246386
+#define WAYROUND_I2P_20240109_203545_246386
 
 #include "types.hpp"
 
