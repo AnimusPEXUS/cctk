@@ -19,6 +19,15 @@ find_package(Boost REQUIRED COMPONENTS json regex)
 
 pkg_check_modules(sigc REQUIRED IMPORTED_TARGET sigc++-3.0)
 
+pkg_check_modules(
+	waylandpp 
+	REQUIRED 
+	IMPORTED_TARGET 
+	wayland-client++ 
+	wayland-client-extra++ 
+	wayland-cursor++
+	)
+
 find_package(ICU 73.0 COMPONENTS uc i18n REQUIRED)
 
 get_filename_component(cctk_abs_path ../..
@@ -37,6 +46,7 @@ target_link_libraries(
 	cctk_sys_linux_wayland_2024 
 	PUBLIC 
 	PkgConfig::sigc 
+	PkgConfig::waylandpp 
 	Boost::json
 	Boost::regex
 	ICU::uc 
@@ -49,6 +59,7 @@ target_include_directories(
 	PUBLIC 
 	${Boost_INCLUDE_DIRS}
 	${ICU_INCLUDE_DIRS}
+	PkgConfig::waylandpp
 	"."
 	"${cctk_abs_path}"
 	)

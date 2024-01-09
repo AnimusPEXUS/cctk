@@ -42,6 +42,8 @@ namespace cctk
         std::shared_ptr<SystemI> system;
 
         std::shared_ptr<sigc::signal<void()>> sigAfterStart;
+
+        bool running = false;
     };
 
 } // namespace cctk

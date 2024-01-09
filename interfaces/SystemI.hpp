@@ -9,6 +9,7 @@ namespace cctk
     {
       public:
         virtual int init() = 0;
+        virtual int run()  = 0;
     };
 
 } // namespace cctk

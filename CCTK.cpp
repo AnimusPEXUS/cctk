@@ -33,7 +33,8 @@ namespace cctk
 
     int CCTK::run()
     {
-        return 0;
+        running = true;
+        return system->run();
     }
 
     int CCTK::setSystem(std::shared_ptr<SystemI> sys)

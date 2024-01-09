@@ -19,13 +19,16 @@ int main(int argc, char **args)
 
     {
         auto x = cctk->get_sigAfterStart().lock();
-        x->connect(
-            [cctk]()
-            {
-                auto win = cctk->createWindow();
-                win->show();
-            }
-        );
+        if (x)
+        {
+            x->connect(
+                [cctk]()
+                {
+                    auto win = cctk->createWindow();
+                    win->show();
+                }
+            );
+        }
     }
 
     return cctk->run();
