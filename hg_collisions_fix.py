@@ -19,31 +19,28 @@ def edit_file(fullpath_first, fullpath):
         if lns[0].startswith('#ifndef'):
             del lns[0]
         else:
-            print(f"skipping {relp}")
+            print(f"skipping 1 {relp}")
             return
 
     if len(lns) > 0:
         if lns[0].startswith('#define'):
             del lns[0]
         else:
-            print(f"skipping {relp}")
+            print(f"skipping 2 {relp}")
             return
 
-    if len(lns) > 0:
-        if lns[-1].startswith(''):
+    while len(lns) > 0:
+        if lns[-1].isspace():
             del lns[-1]
-        else:
-            print(f"skipping {relp}")
-            return
-
+    
     if len(lns) > 0:
         if lns[-1].startswith('#endif'):
             del lns[-1]
         else:
-            print(f"skipping {relp}")
+            print(f"skipping 4 {relp}: {lns[-1]}")
             return
 
-    a = datetime.datetime.utcnow()
+    a = datetime.datetime.now(datetime.UTC)
 
     gened_name = 'WAYROUND_{:04d}{:02d}{:02d}_{:02d}{:02d}{:02d}_{:d}'.format(
         a.year, a.month, a.day, a.hour, a.minute, a.second, a.microsecond
@@ -73,7 +70,7 @@ def walk_dir(fullpath_first, fullpath):
 
         if os.path.isdir(joined):
 
-            if i == '.git':
+            if i in ['.git', 'build']:
                 continue
 
             walk_dir(fullpath_first, joined)
