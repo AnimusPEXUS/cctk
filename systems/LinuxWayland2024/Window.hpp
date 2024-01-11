@@ -10,7 +10,8 @@
 #include <wayland-client.hpp>
 #include <wayland-cursor.hpp>
 
-#include <interfaces/SystemI.hpp>
+#include "interfaces/SystemI.hpp"
+#include "interfaces/WindowI.hpp"
 
 namespace wayround_i2p::cctk::system::linux_wayland_2024
 {
@@ -21,11 +22,6 @@ class Window : public WindowI
     static std::shared_ptr<Window> create();
 
     ~Window();
-
-    int init() override;
-    int run() override;
-
-    std::shared_ptr<WindowI> createWindow() override;
 
   protected:
     Window();

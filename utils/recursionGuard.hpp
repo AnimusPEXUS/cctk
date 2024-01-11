@@ -7,6 +7,7 @@
 
 namespace wayround_i2p::cctk
 {
+
 template <class R, class... Types>
 R recursionGuard(
     bool                      &already_running,

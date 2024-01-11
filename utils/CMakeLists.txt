@@ -19,6 +19,7 @@ find_package(PkgConfig REQUIRED)
 add_library(
 	cctk_utils
 	recursionGuard.cpp
+	Property.cpp
 	)
 
 target_link_libraries(
@@ -32,6 +33,5 @@ target_include_directories(
 	PUBLIC 
 	${Boost_INCLUDE_DIRS}
 	${ICU_INCLUDE_DIRS}
-	.
-	../types
+	..
     	)
