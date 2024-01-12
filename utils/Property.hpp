@@ -16,11 +16,11 @@ namespace wayround_i2p::cctk
     2. possibility to have undefined state.
     this is configured at construction time and should be not changed afterwards.
 
-    If Property current state is undefined, - attempt to get it's value, leads to
-    call getUndefined(), in which you can return value or throw exception;
+    If Property current state is undefined, - attempt to get it's value, leads
+    to call getUndefined(), in which you can return value or throw exception;
     Property doesn't use getter() in undefined state.
 
-    If Propery is in default state - it uses function getDefault() to know which
+    If Property is in default state - it uses function getDefault() to know which
     value is actually default and doesn't use getter() to get value.
 
     If Property not Defaultable - calling functions related to default state -
@@ -33,11 +33,16 @@ namespace wayround_i2p::cctk
 
  */
 
+// note: at this point it is intentional to not make isUndefinable/isDefaultable
+//       a Property parameter and to not disable corresponding functions via
+//       traits. - that is to not overcomplicate this cunctional and not make
+//       it hard to read and understand.
+
 template <class T>
 struct PropertyConfig
 {
-    bool isDefaultable = false;
     bool isUndefinable = false;
+    bool isDefaultable = false;
 
     // return true if valid
     // (optional)
@@ -82,8 +87,19 @@ class Property
     bool isUndefined();
     void undefine();
 
-    const sigc::signal<void()> onBeforeSet;      // todo: remove? no. may be usefull
-    const sigc::signal<void()> onAfterSet;
+    const sigc::signal<
+        void(
+            T &supposed_new_value,       // possibilyty to check new value and modify it before change
+
+            std::function<void()> cancel // call this cb to cancel change.
+        )>
+        onBeforeSet;                     // todo: remove? no. may be usefull
+
+    const sigc::signal<
+        void(
+            const T &supposed_new_value // check new value
+        )>
+        onAfterSet;
 
     const sigc::signal<void()> onBeforeDefault;  // todo: remove? no. may be usefull
     const sigc::signal<void()> onAfterDefault;
@@ -96,6 +112,9 @@ class Property
 
     bool state_default;
     bool state_undefined;
+
+    inline void exceptIfNotDefaultable();
+    inline void exceptIfNotUndefinable();
 };
 
 } // namespace wayround_i2p::cctk

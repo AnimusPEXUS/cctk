@@ -29,7 +29,13 @@ template <class T>
 T Property<T>::get()
 {
     // todo: take in account default/undefined state
-    if (isDefault())
+
+    if (cfg.isUndefinable && isUndefined())
+    {
+        return getUndefined();
+    }
+
+    if (cfg.isDefaultable && isDefault())
     {
         return getDefault();
     }
@@ -49,26 +55,48 @@ bool Property<T>::isUndefinable()
 }
 
 template <class T>
+void Property<T>::exceptIfNotDefaultable()
+{
+    if (!cfg.isDefaultable)
+    {
+        throw std::runtime_error("property not defaultable");
+    }
+}
+
+template <class T>
+void Property<T>::exceptIfNotUndefinable()
+{
+    if (!cfg.isUndefinable)
+    {
+        throw std::runtime_error("property not undefinable");
+    }
+}
+
+template <class T>
 T Property<T>::getDefault()
 {
+    exceptIfNotDefaultable();
     return cfg.getDefault();
 }
 
 template <class T>
 bool Property<T>::isDefault()
 {
+    exceptIfNotDefaultable();
     return state_default;
 }
 
 template <class T>
 bool Property<T>::isDefault(T v)
 {
+    exceptIfNotDefaultable();
     return v == getDefault();
 }
 
 template <class T>
 void Property<T>::resetToDefault()
 {
+    exceptIfNotDefaultable();
     state_default = true;
     if (cfg.resetting_to_default_calls_setter_with_result_of_getDefault)
     {
@@ -79,6 +107,7 @@ void Property<T>::resetToDefault()
 template <class T>
 bool Property<T>::isUndefined()
 {
+    exceptIfNotUndefinable();
     return state_undefined;
 }
 
