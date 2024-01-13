@@ -21,7 +21,24 @@ bool Property<T>::set(T value)
     {
         return false;
     }
-    cfg.setter(value);
+
+    auto &val_to_set = value;
+    bool  cancel_set = false;
+
+    std::function cancel_set_cb =
+        [&cancel_set]()
+    {
+        cancel_set = true;
+    };
+
+    onBeforeSet.emit(&val_to_set, cancel_set_cb);
+
+    if (!cancel_set)
+    {
+        cfg.setter(val_to_set);
+        onAfterSet.emit(&val_to_set);
+    }
+
     return true;
 }
 
@@ -97,11 +114,16 @@ template <class T>
 void Property<T>::resetToDefault()
 {
     exceptIfNotDefaultable();
+    onBeforeDefault.emit();
     state_default = true;
+    // todo: for some reason this next line is ok to compile,
+    //       wile this field not in cfg.
+    //       not touching it for now to see how compiler behave next.
     if (cfg.resetting_to_default_calls_setter_with_result_of_getDefault)
     {
         cfg.setter(getDefault());
     }
+    onAfterDefault.emit();
 }
 
 template <class T>
@@ -109,6 +131,14 @@ bool Property<T>::isUndefined()
 {
     exceptIfNotUndefinable();
     return state_undefined;
+}
+
+template <class T>
+void Property<T>::undefine()
+{
+    onBeforeUndefine.emit();
+    state_undefined = true;
+    onAfterUndefine.emit();
 }
 
 } // namespace wayround_i2p::cctk

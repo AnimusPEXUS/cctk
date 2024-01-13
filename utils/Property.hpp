@@ -87,26 +87,6 @@ class Property
     bool isUndefined();
     void undefine();
 
-    const sigc::signal<
-        void(
-            T &supposed_new_value,       // possibilyty to check new value and modify it before change
-
-            std::function<void()> cancel // call this cb to cancel change.
-        )>
-        onBeforeSet;                     // todo: remove? no. may be usefull
-
-    const sigc::signal<
-        void(
-            const T &supposed_new_value // check new value
-        )>
-        onAfterSet;
-
-    const sigc::signal<void()> onBeforeDefault;  // todo: remove? no. may be usefull
-    const sigc::signal<void()> onAfterDefault;
-
-    const sigc::signal<void()> onBeforeUndefine; // todo: remove? no. may be usefull
-    const sigc::signal<void()> onAfterUndefine;
-
   private:
     PropertyConfig<T> cfg;
 
@@ -115,6 +95,30 @@ class Property
 
     inline void exceptIfNotDefaultable();
     inline void exceptIfNotUndefinable();
+
+    sigc::signal<
+        void(
+            // possibilyty to check new value and modify it before change
+            T &supposed_new_value,
+
+            // call this cb to cancel change.
+            std::function<void()> cancel
+        )>
+        onBeforeSet;
+
+    sigc::signal<
+        void(
+            // check new value. changing it will not
+            // lead to anything
+            const T &supposed_new_value
+        )>
+        onAfterSet;
+
+    sigc::signal<void()> onBeforeDefault;
+    sigc::signal<void()> onAfterDefault;
+
+    sigc::signal<void()> onBeforeUndefine;
+    sigc::signal<void()> onAfterUndefine;
 };
 
 } // namespace wayround_i2p::cctk
