@@ -33,6 +33,18 @@ namespace wayround_i2p::cctk
 
  */
 
+template <class T>
+using getterFunc = std::function<T()>;
+
+template <class T>
+using setterFunc = std::function<bool(const T &)>;
+
+template <class T>
+using validityCheckFunc = std::function<bool(T)>;
+
+template <class T>
+using validityCheckFuncRef = std::function<bool(const T &)>;
+
 // note: at this point it is intentional to not make isUndefinable/isDefaultable
 //       a Property parameter and to not disable corresponding functions via
 //       traits. - that is to not overcomplicate this cunctional and not make
@@ -46,33 +58,45 @@ struct PropertyConfig
 
     // return true if valid
     // (optional)
-    std::function<bool()> valueValidityCheck(T);
+    validityCheckFunc<T> valueValidityCheck;
 
     // must be defined if Property is defaultable. used to get actual default
     // value. it isn't required to constantly be same result, so this way,
     // you can get value else where.
-    std::function<T()> getDefault();
+    getterFunc<T> getDefault;
 
     // must be defined if Property is undefinable. allows you to take action in
     // case of attempt to get value from property in undefined state
-    std::function<T()> getUndefined();
+    getterFunc<T> getUndefined;
 
     // must be defined. you provide actual property value
-    std::function<T()> getter();
+    getterFunc<T> getter;
 
     // must be defined. you store somewhere actual property value
-    std::function<void(T)> setter();
+    setterFunc<T> setter;
 };
 
 template <class T>
 class Property
 {
   public:
+    // Getter/Setter/External
+    static Property create(
+        T                      &var,
+        getterFunc<T>           getter        = nullptr,
+        setterFunc<T>           setter        = nullptr,
+        getterFunc<T>           getDefault    = nullptr,
+        bool                    isDefaultable = false,
+        getterFunc<T>           getUndefined  = nullptr,
+        bool                    isUndefinable = false,
+        validityCheckFuncRef<T> checker       = nullptr
+    );
+
     Property(const PropertyConfig<T> &cfg);
     ~Property();
 
     // returns true if value set ok
-    bool set(T value);
+    bool set(const T &value);
     T    get();
 
     bool isDefaultable();
@@ -87,6 +111,31 @@ class Property
     bool isUndefined();
     void undefine();
 
+    using onBeforeSetSig = sigc::signal<
+        void(
+            // possibilyty to check new value and modify it before change
+            T &supposed_new_value,
+
+            // call this cb to cancel change.
+            std::function<void()> cancel
+        )>;
+
+    using onAfterSetSig = sigc::signal<
+        void(
+            // check new value. changing it will not
+            // lead to anything
+            const T &supposed_new_value
+        )>;
+
+    using voidSig = sigc::signal<void()>;
+
+    onBeforeSetSig onBeforeSet() { return onBeforeSet_; };
+    onAfterSetSig  onAfterSet() { return onAfterSet_; };
+    voidSig        onBeforeDefault() { return onBeforeDefault_; };
+    voidSig        onAfterDefault() { return onAfterDefault_; };
+    voidSig        onBeforeUndefine() { return onBeforeUndefine_; };
+    voidSig        onAfterUndefine() { return onAfterUndefine_; };
+
   private:
     PropertyConfig<T> cfg;
 
@@ -96,29 +145,14 @@ class Property
     inline void exceptIfNotDefaultable();
     inline void exceptIfNotUndefinable();
 
-    sigc::signal<
-        void(
-            // possibilyty to check new value and modify it before change
-            T &supposed_new_value,
+    onBeforeSetSig onBeforeSet_;
+    onAfterSetSig  onAfterSet_;
 
-            // call this cb to cancel change.
-            std::function<void()> cancel
-        )>
-        onBeforeSet;
+    voidSig onBeforeDefault_;
+    voidSig onAfterDefault_;
 
-    sigc::signal<
-        void(
-            // check new value. changing it will not
-            // lead to anything
-            const T &supposed_new_value
-        )>
-        onAfterSet;
-
-    sigc::signal<void()> onBeforeDefault;
-    sigc::signal<void()> onAfterDefault;
-
-    sigc::signal<void()> onBeforeUndefine;
-    sigc::signal<void()> onAfterUndefine;
+    voidSig onBeforeUndefine_;
+    voidSig onAfterUndefine_;
 };
 
 } // namespace wayround_i2p::cctk

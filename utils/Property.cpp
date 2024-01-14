@@ -4,6 +4,57 @@ namespace wayround_i2p::cctk
 {
 
 template <class T>
+Property::create(
+    T                      &var,
+    getterFunc<T>           getter        = nullptr,
+    setterFunc<T>           setter        = nullptr,
+    getterFunc<T>           getDefault    = nullptr,
+    bool                    isDefaultable = false,
+    getterFunc<T>           getUndefined  = nullptr,
+    bool                    isUndefinable = false,
+    validityCheckFuncRef<T> checker       = nullptr
+)
+{
+
+    if (!getter)
+    {
+        getter = [&var, checker]()
+        {
+            return var;
+        };
+    }
+
+    if (!setter)
+    {
+        setter = [&var](T new_val)
+        {
+            if (checker)
+            {
+                if (!checker(var))
+                {
+                    return false;
+                }
+            }
+            var = new_val;
+            return true;
+        };
+    }
+
+    auto ret = Property(
+        {
+            isUndefinable : isUndefinable,
+            isDefaultable : isDefaultable,
+            getter : getter,
+            setter : setter,
+            getDefault : getDefault,
+            getUndefined : getUndefined
+        }
+    );
+
+    return ret;
+}
+
+template <class T>
 Property<T>::Property(const PropertyConfig<T> &cfg)
 {
     this->cfg = cfg;
@@ -15,15 +66,17 @@ Property<T>::~Property()
 }
 
 template <class T>
-bool Property<T>::set(T value)
+bool Property<T>::set(const T &value)
 {
     if (cfg.valueValidityCheck && !cfg.valueValidityCheck(value))
     {
         return false;
     }
 
-    auto &val_to_set = value;
-    bool  cancel_set = false;
+    auto  val_to_set_int = value;
+    auto &val_to_set     = val_to_set_int;
+
+    bool cancel_set = false;
 
     std::function cancel_set_cb =
         [&cancel_set]()
@@ -31,12 +84,12 @@ bool Property<T>::set(T value)
         cancel_set = true;
     };
 
-    onBeforeSet.emit(&val_to_set, cancel_set_cb);
+    onBeforeSet_.emit(&val_to_set, cancel_set_cb);
 
     if (!cancel_set)
     {
         cfg.setter(val_to_set);
-        onAfterSet.emit(&val_to_set);
+        onAfterSet_.emit(&val_to_set);
     }
 
     return true;
@@ -113,8 +166,9 @@ bool Property<T>::isDefault(T v)
 template <class T>
 void Property<T>::resetToDefault()
 {
+    if (cfg.resetting_to_default_calls_setter_with_result_of_getDefault) {}
     exceptIfNotDefaultable();
-    onBeforeDefault.emit();
+    onBeforeDefault_.emit();
     state_default = true;
     // todo: for some reason this next line is ok to compile,
     //       wile this field not in cfg.
@@ -123,7 +177,7 @@ void Property<T>::resetToDefault()
     {
         cfg.setter(getDefault());
     }
-    onAfterDefault.emit();
+    onAfterDefault_.emit();
 }
 
 template <class T>
@@ -136,9 +190,9 @@ bool Property<T>::isUndefined()
 template <class T>
 void Property<T>::undefine()
 {
-    onBeforeUndefine.emit();
+    onBeforeUndefine_.emit();
     state_undefined = true;
-    onAfterUndefine.emit();
+    onAfterUndefine_.emit();
 }
 
 } // namespace wayround_i2p::cctk
