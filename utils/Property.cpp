@@ -4,21 +4,21 @@ namespace wayround_i2p::cctk
 {
 
 template <class T>
-Property::create(
+Property<T> Property<T>::create(
     T                      &var,
-    getterFunc<T>           getter        = nullptr,
-    setterFunc<T>           setter        = nullptr,
-    getterFunc<T>           getDefault    = nullptr,
-    bool                    isDefaultable = false,
-    getterFunc<T>           getUndefined  = nullptr,
-    bool                    isUndefinable = false,
-    validityCheckFuncRef<T> checker       = nullptr
+    getterFunc<T>           getter,
+    setterFunc<T>           setter,
+    getterFunc<T>           getDefault,
+    bool                    isDefaultable,
+    getterFunc<T>           getUndefined,
+    bool                    isUndefinable,
+    validityCheckFuncRef<T> checker
 )
 {
 
     if (!getter)
     {
-        getter = [&var, checker]()
+        getter = [&var]()
         {
             return var;
         };
@@ -26,7 +26,7 @@ Property::create(
 
     if (!setter)
     {
-        setter = [&var](T new_val)
+        setter = [&var, checker](T new_val)
         {
             if (checker)
             {
