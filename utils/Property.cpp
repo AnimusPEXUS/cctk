@@ -47,7 +47,8 @@ Property<T> Property<T>::create(
             getter : getter,
             setter : setter,
             getDefault : getDefault,
-            getUndefined : getUndefined
+            getUndefined : getUndefined,
+            checker : checker
         }
     );
 

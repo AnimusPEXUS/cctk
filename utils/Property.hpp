@@ -8,29 +8,28 @@
 namespace wayround_i2p::cctk
 {
 
-/**
-    functionality to enable Properties in cctk.
-
-    Property can be a simple get/set property, with two options:
-    1. possibility to have default state;
-    2. possibility to have undefined state.
-    this is configured at construction time and should be not changed afterwards.
-
-    If Property current state is undefined, - attempt to get it's value, leads
-    to call getUndefined(), in which you can return value or throw exception;
-    Property doesn't use getter() in undefined state.
-
-    If Property is in default state - it uses function getDefault() to know which
-    value is actually default and doesn't use getter() to get value.
-
-    If Property not Defaultable - calling functions related to default state -
-    leads to exception.
-
-    If Property not Undefinable - calling functions related to undefined state -
-    leads to exception.
-
-    Setting any valid value to property - makes Propery undefault and defined.
-
+/*!
+ *   functionality to enable Properties in cctk.
+ *
+ *   Property can be a simple get/set property, with two options:
+ *   1. possibility to have default state;
+ *   2. possibility to have undefined state.
+ *   this is configured at construction time and should be not changed afterwards.
+ *
+ *   If Property current state is undefined, - attempt to get it's value, leads
+ *   to call getUndefined(), in which you can return value or throw exception;
+ *   Property doesn't use getter() in undefined state.
+ *
+ *   If Property is in default state - it uses function getDefault() to know which
+ *   value is actually default and doesn't use getter() to get value.
+ *
+ *   If Property not Defaultable - calling functions related to default state -
+ *   leads to exception.
+ *
+ *   If Property not Undefinable - calling functions related to undefined state -
+ *   leads to exception.
+ *
+ *   Setting any valid value to property - makes Propery undefault and defined.
  */
 
 template <class T>
@@ -56,23 +55,25 @@ struct PropertyConfig
     bool isUndefinable = false;
     bool isDefaultable = false;
 
-    // return true if valid
-    // (optional)
+    //! return true if valid
+    //! (optional)
+    //! this cb is used if setter not defined and Property is using it's own
+    //! default setter
     validityCheckFunc<T> valueValidityCheck;
 
-    // must be defined if Property is defaultable. used to get actual default
-    // value. it isn't required to constantly be same result, so this way,
-    // you can get value else where.
+    //! must be defined if Property is defaultable. used to get actual default
+    //! value. it isn't required to constantly be same result, so this way,
+    //! you can get value else where.
     getterFunc<T> getDefault;
 
-    // must be defined if Property is undefinable. allows you to take action in
-    // case of attempt to get value from property in undefined state
+    //! must be defined if Property is undefinable. allows you to take action in
+    //! case of attempt to get value from property in undefined state
     getterFunc<T> getUndefined;
 
-    // must be defined. you provide actual property value
+    //! must be defined. you provide actual property value
     getterFunc<T> getter;
 
-    // must be defined. you store somewhere actual property value
+    //! must be defined. you store somewhere actual property value
     setterFunc<T> setter;
 };
 
@@ -81,7 +82,7 @@ class Property
 {
   public:
     // Getter/Setter/External
-    static Property create(
+    static Property<T> create(
         T                      &var,
         getterFunc<T>           getter        = nullptr,
         setterFunc<T>           setter        = nullptr,
