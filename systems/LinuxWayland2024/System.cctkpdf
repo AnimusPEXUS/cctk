@@ -1,0 +1,6 @@
+- cls: System
+  dsc:
+    - prop_name: Mouse
+      prop_funcs: sd
+      prop_type: MouseI
+      prop_var_name: mouse_

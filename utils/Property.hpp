@@ -112,6 +112,8 @@ class Property
     bool isUndefined();
     void undefine();
 
+    bool isValid(const T &);
+
     using onBeforeSetSig = sigc::signal<
         void(
             // possibilyty to check new value and modify it before change

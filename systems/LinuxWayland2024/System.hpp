@@ -27,6 +27,8 @@ class System : public SystemI
 
     std::shared_ptr<WindowI> createWindow() override;
 
+    #include "_props_System.hpp"
+
   protected:
     System();
 
