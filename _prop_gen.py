@@ -1,3 +1,4 @@
+#!/bin/python3
 
 # This script is code generator for CCTK Property Description Files.
 # It's a part of utils/Property.[ch]pp files
@@ -161,7 +162,7 @@ def main():
         return
 
     print(filename)
-    print(filename_dir)
+    # print(filename_dir)
 
     if not filename.endswith('.cctkpdf'):
         print("invalid file")

@@ -1,3 +1,5 @@
+#!/bin/python3
+
 import os.path
 import datetime
 
@@ -34,7 +36,7 @@ def edit_file(fullpath_first, fullpath):
             del lns[-1]
         else:
             break
-    
+
     if len(lns) > 0:
         if lns[-1].startswith('#endif'):
             del lns[-1]
