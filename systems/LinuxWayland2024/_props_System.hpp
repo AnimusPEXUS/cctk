@@ -1,7 +1,7 @@
 
 
     // CCTK Property Description File
-    // (Generated!: edit System.cctkpdf and rerun `_prop_gen.py ./System.cctkpdf`)
+    // (Generated!: edit System.cctkpdf and rerun _props_regen.py)
 
     bool p_Mouse_isDefaultable()
         {

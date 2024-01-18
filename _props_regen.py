@@ -55,7 +55,7 @@ def gen_class_properties_file(
             code += '''
 
     // CCTK Property Description File
-    // (Generated!: edit {cctkpdf_filename} and rerun `_prop_gen.py ./{cctkpdf_filename}`)
+    // (Generated!: edit {cctkpdf_filename} and rerun _props_regen.py)
 
     bool p_{prop_name}_isDefaultable()
         {{
