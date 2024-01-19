@@ -4,6 +4,7 @@
 #include <functional>
 
 #include <sigc++/signal.h>
+// #include <unicode/unistr.h>
 
 namespace wayround_i2p::cctk
 {
@@ -90,7 +91,7 @@ class Property
         bool                    isDefaultable = false,
         getterFunc<T>           getUndefined  = nullptr,
         bool                    isUndefinable = false,
-        validityCheckFuncRef<T> checker       = nullptr
+        validityCheckFuncRef<T> isValid       = nullptr
     );
 
     Property(const PropertyConfig<T> &cfg);
@@ -159,5 +160,7 @@ class Property
 };
 
 } // namespace wayround_i2p::cctk
+
+#include "utils/Property.cpp"
 
 #endif

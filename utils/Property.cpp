@@ -12,7 +12,7 @@ Property<T> Property<T>::create(
     bool                    isDefaultable,
     getterFunc<T>           getUndefined,
     bool                    isUndefinable,
-    validityCheckFuncRef<T> checker
+    validityCheckFuncRef<T> isValid
 )
 {
     if (!getter)
@@ -25,11 +25,11 @@ Property<T> Property<T>::create(
 
     if (!setter)
     {
-        setter = [&var, checker](T new_val)
+        setter = [&var, isValid](T new_val)
         {
-            if (checker)
+            if (isValid)
             {
-                if (!checker(var))
+                if (!isValid(var))
                 {
                     return false;
                 }
@@ -40,15 +40,14 @@ Property<T> Property<T>::create(
     }
 
     auto ret = Property(
-        {
-            var : var,
-            isUndefinable : isUndefinable,
-            isDefaultable : isDefaultable,
-            getter : getter,
-            setter : setter,
-            getDefault : getDefault,
-            getUndefined : getUndefined,
-            checker : checker
+        PropertyConfig<T>{
+            .isUndefinable = isUndefinable,
+            .isDefaultable = isDefaultable,
+            .isValid       = isValid,
+            .getDefault    = getDefault,
+            .getUndefined  = getUndefined,
+            .getter        = getter,
+            .setter        = setter,
         }
     );
 
@@ -69,7 +68,7 @@ Property<T>::~Property()
 template <class T>
 bool Property<T>::set(const T &value)
 {
-    if (cfg.valueValidityCheck && !cfg.valueValidityCheck(value))
+    if (cfg.isValid && !cfg.isValid(value))
     {
         return false;
     }
@@ -85,12 +84,12 @@ bool Property<T>::set(const T &value)
         cancel_set = true;
     };
 
-    onBeforeSet_.emit(&val_to_set, cancel_set_cb);
+    onBeforeSet_.emit(val_to_set, cancel_set_cb);
 
     if (!cancel_set)
     {
         cfg.setter(val_to_set);
-        onAfterSet_.emit(&val_to_set);
+        onAfterSet_.emit(val_to_set);
     }
 
     return true;

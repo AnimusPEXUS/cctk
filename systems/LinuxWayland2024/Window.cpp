@@ -12,7 +12,7 @@ std::shared_ptr<Window> Window::create(std::shared_ptr<System> sys)
 
 Window::Window(std::shared_ptr<System> sys) :
     title_(Property<icu::UnicodeString>::create(title)),
-    position_(Property<Point2d>::create(position))
+    position_(Property<wayround_i2p::cctk::Point2d>::create(position))
 {
     this->sys = sys;
 }

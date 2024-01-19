@@ -4,6 +4,7 @@
 #include <memory>
 
 #include <linux/input.h>
+#include <unicode/unistr.h>
 
 #include <wayland-client-protocol-extra.hpp>
 #include <wayland-client-protocol.hpp>
@@ -42,11 +43,11 @@ class Window : public WindowI
     std::shared_ptr<Window> own_ptr;
     std::shared_ptr<System> sys;
 
-    icu::UnicodeString title;
-    Point2d            position;
+    icu::UnicodeString          title;
+    wayround_i2p::cctk::Point2d position;
 
-    Property<icu::UnicodeString> title_;
-    Property<Point2d>            position_;
+    wayround_i2p::cctk::Property<icu::UnicodeString>          title_;
+    wayround_i2p::cctk::Property<wayround_i2p::cctk::Point2d> position_;
 };
 
 } // namespace wayround_i2p::cctk::system::linux_wayland_2024
