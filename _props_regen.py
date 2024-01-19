@@ -79,7 +79,7 @@ def gen_class_properties_file(
 
     bool p_{prop_name}_set(const {prop_type} &value)
         {{
-        retrun this->{prop_var_name}.set(value);
+        return this->{prop_var_name}.set(value);
         }}
 
     {prop_type}    p_{prop_name}_get()

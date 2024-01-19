@@ -9,12 +9,19 @@ std::shared_ptr<Window> Window::create()
     return ret;
 }
 
-Window::Window()
+Window::Window() :
+    title_(Property<icu::UnicodeString>::create(title)),
+    position_(Property<Point2d>::create(position))
 {
 }
 
 Window::~Window()
 {
+}
+
+int Window::show()
+{
+    return 0;
 }
 
 } // namespace wayround_i2p::cctk::system::linux_wayland_2024

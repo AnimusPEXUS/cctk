@@ -15,7 +15,6 @@ Property<T> Property<T>::create(
     validityCheckFuncRef<T> checker
 )
 {
-
     if (!getter)
     {
         getter = [&var]()
@@ -42,6 +41,7 @@ Property<T> Property<T>::create(
 
     auto ret = Property(
         {
+            var : var,
             isUndefinable : isUndefinable,
             isDefaultable : isDefaultable,
             getter : getter,

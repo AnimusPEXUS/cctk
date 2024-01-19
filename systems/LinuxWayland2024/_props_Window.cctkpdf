@@ -1,0 +1,12 @@
+- cls: Window
+  dsc:
+
+    - prop_name: Title
+      prop_funcs: s
+      prop_type: icu::UnicodeString
+      prop_var_name: title_
+
+    - prop_name: Position
+      prop_funcs: s
+      prop_type: Point2d
+      prop_var_name: position_

@@ -204,6 +204,7 @@ int System::wayland_init()
 
 std::shared_ptr<WindowI> System::createWindow()
 {
+    return nullptr;
 }
 
 } // namespace wayround_i2p::cctk::system::linux_wayland_2024

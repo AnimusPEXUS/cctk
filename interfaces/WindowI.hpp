@@ -16,10 +16,10 @@ namespace wayround_i2p::cctk
 class WindowI
 {
   public:
-    virtual void               setTitle(icu::UnicodeString val) = 0;
-    virtual icu::UnicodeString getTitle()                       = 0;
-
-    virtual void setPosition(Point2d val) = 0;
+    virtual bool               p_Title_set(const icu::UnicodeString &val) = 0;
+    virtual icu::UnicodeString p_Title_get()                              = 0;
+    virtual bool               p_Position_set(const Point2d &val)         = 0;
+    virtual Point2d            p_Position_get()                           = 0;
 
     virtual int show() = 0;
 };

@@ -1,7 +1,7 @@
 #ifndef WAYROUND_I2P_20240117_175210_709778
 #define WAYROUND_I2P_20240117_175210_709778
 
-#include "types.hpp"
+#include "types/ColorRGB.hpp"
 
 namespace wayround_i2p::cctk
 {

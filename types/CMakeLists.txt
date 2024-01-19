@@ -27,5 +27,6 @@ target_include_directories(
 	PUBLIC 
 	${Boost_INCLUDE_DIRS}
 	${ICU_INCLUDE_DIRS}
+	..
     	)
 
