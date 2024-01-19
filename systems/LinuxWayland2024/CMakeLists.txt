@@ -30,10 +30,10 @@ pkg_check_modules(
 
 find_package(ICU 73.0 COMPONENTS uc i18n REQUIRED)
 
-get_filename_component(cctk_abs_path ../..
-                       ABSOLUTE)
+# get_filename_component(cctk_abs_path ../..
+#                      ABSOLUTE)
 
-add_subdirectory("${cctk_abs_path}" cctk_bin)
+# add_subdirectory("${cctk_abs_path}" cctk_bin)
 
 add_library(
 	cctk_sys_linux_wayland_2024 
@@ -45,21 +45,18 @@ add_library(
 target_link_libraries(
 	cctk_sys_linux_wayland_2024 
 	PUBLIC 
-	PkgConfig::sigc 
 	PkgConfig::waylandpp 
-	Boost::json
-	Boost::regex
-	ICU::uc 
-	ICU::i18n
-	cctk
 	)
 
 target_include_directories(
 	cctk_sys_linux_wayland_2024 
-	PUBLIC 
+	PRIVATE 
 	${Boost_INCLUDE_DIRS}
 	${ICU_INCLUDE_DIRS}
-	PkgConfig::waylandpp
-	"${cctk_abs_path}"
+	${sigc_INCLUDE_DIRS}
+	${waylandpp_INCLUDE_DIRS}
+	# PkgConfig::waylandpp
+	# "${cctk_abs_path}"
+	../..
 	)
 

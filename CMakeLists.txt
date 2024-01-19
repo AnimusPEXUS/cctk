@@ -39,7 +39,6 @@ target_link_libraries(
 	cctk_types
 	cctk_interfaces
 	cctk_utils
-	PRIVATE
 	PkgConfig::sigc 
 	Boost::json
 	Boost::regex
@@ -49,12 +48,10 @@ target_link_libraries(
 
 target_include_directories(
 	cctk 
-	PUBLIC 
-	types
-	interfaces
-	utils
 	PRIVATE
 	${ICU_INCLUDE_DIRS}
 	${Boost_INCLUDE_DIRS}
+	${sigc_INCLUDE_DIRS}
+	.
     )
 

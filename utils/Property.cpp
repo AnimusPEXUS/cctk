@@ -126,24 +126,6 @@ bool Property<T>::isUndefinable()
 }
 
 template <class T>
-void Property<T>::exceptIfNotDefaultable()
-{
-    if (!cfg.isDefaultable)
-    {
-        throw std::runtime_error("property not defaultable");
-    }
-}
-
-template <class T>
-void Property<T>::exceptIfNotUndefinable()
-{
-    if (!cfg.isUndefinable)
-    {
-        throw std::runtime_error("property not undefinable");
-    }
-}
-
-template <class T>
 T Property<T>::getDefault()
 {
     exceptIfNotDefaultable();
@@ -158,7 +140,7 @@ bool Property<T>::isDefault()
 }
 
 template <class T>
-bool Property<T>::isDefault(T v)
+bool Property<T>::isDefault(const T &v)
 {
     exceptIfNotDefaultable();
     return v == getDefault();
@@ -182,6 +164,13 @@ void Property<T>::resetToDefault()
 }
 
 template <class T>
+T Property<T>::getUndefined()
+{
+    exceptIfNotUndefinable();
+    return cfg.getUndefined();
+}
+
+template <class T>
 bool Property<T>::isUndefined()
 {
     exceptIfNotUndefinable();
@@ -194,6 +183,30 @@ void Property<T>::undefine()
     onBeforeUndefine_.emit();
     state_undefined = true;
     onAfterUndefine_.emit();
+}
+
+template <class T>
+bool Property<T>::isValid(const T &v)
+{
+    return cfg.isValid(v);
+}
+
+template <class T>
+void Property<T>::exceptIfNotDefaultable()
+{
+    if (!cfg.isDefaultable)
+    {
+        throw std::runtime_error("property not defaultable");
+    }
+}
+
+template <class T>
+void Property<T>::exceptIfNotUndefinable()
+{
+    if (!cfg.isUndefinable)
+    {
+        throw std::runtime_error("property not undefinable");
+    }
 }
 
 } // namespace wayround_i2p::cctk

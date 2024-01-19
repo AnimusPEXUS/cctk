@@ -9,6 +9,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(PkgConfig REQUIRED)
 
+pkg_check_modules(sigc REQUIRED IMPORTED_TARGET sigc++-3.0)
+
 #get_filename_component(
 #	cctk_types_path ../types
 #	ABSOLUTE)
@@ -24,14 +26,13 @@ add_library(
 
 target_link_libraries(
 	cctk_utils 
-	PUBLIC 
-	cctk_types
 	)
 
 target_include_directories(
 	cctk_utils 
-	PUBLIC 
+	PRIVATE 
 	${Boost_INCLUDE_DIRS}
 	${ICU_INCLUDE_DIRS}
+	${sigc_INCLUDE_DIRS}
 	..
     	)

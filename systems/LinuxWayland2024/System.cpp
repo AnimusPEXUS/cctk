@@ -11,6 +11,8 @@ std::shared_ptr<System> System::create()
         new System()
     );
 
+    ret->own_ptr = ret;
+
     return ret;
 }
 
@@ -204,7 +206,8 @@ int System::wayland_init()
 
 std::shared_ptr<WindowI> System::createWindow()
 {
-    return nullptr;
+    auto ret = Window::create(own_ptr);
+    return ret;
 }
 
 } // namespace wayround_i2p::cctk::system::linux_wayland_2024

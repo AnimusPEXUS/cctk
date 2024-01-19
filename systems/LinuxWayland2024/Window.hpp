@@ -17,13 +17,17 @@
 
 #include "utils/Property.hpp"
 
+#include <systems/LinuxWayland2024/System.hpp>
+
 namespace wayround_i2p::cctk::system::linux_wayland_2024
 {
+
+class System;
 
 class Window : public WindowI
 {
   public:
-    static std::shared_ptr<Window> create();
+    static std::shared_ptr<Window> create(std::shared_ptr<System>);
 
     ~Window();
 
@@ -32,9 +36,12 @@ class Window : public WindowI
 #include "_props_Window.hpp"
 
   protected:
-    Window();
+    Window(std::shared_ptr<System>);
 
   private:
+    std::shared_ptr<Window> own_ptr;
+    std::shared_ptr<System> sys;
+
     icu::UnicodeString title;
     Point2d            position;
 

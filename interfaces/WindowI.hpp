@@ -8,8 +8,6 @@
 #include "KeyboardI.hpp"
 #include "PointerI.hpp"
 
-#include "types.hpp"
-
 namespace wayround_i2p::cctk
 {
 

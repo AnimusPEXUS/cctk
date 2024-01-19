@@ -59,7 +59,7 @@ struct PropertyConfig
     //! (optional)
     //! this cb is used if setter not defined and Property is using it's own
     //! default setter
-    validityCheckFunc<T> valueValidityCheck;
+    validityCheckFunc<T> isValid;
 
     //! must be defined if Property is defaultable. used to get actual default
     //! value. it isn't required to constantly be same result, so this way,
@@ -105,7 +105,7 @@ class Property
 
     T    getDefault();
     bool isDefault();
-    bool isDefault(T);
+    bool isDefault(const T &);
     void resetToDefault();
 
     T    getUndefined();

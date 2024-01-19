@@ -11,6 +11,9 @@
 #include <wayland-cursor.hpp>
 
 #include <interfaces/SystemI.hpp>
+#include <interfaces/WindowI.hpp>
+
+#include <systems/LinuxWayland2024/Window.hpp>
 
 namespace wayround_i2p::cctk::system::linux_wayland_2024
 {
@@ -31,6 +34,8 @@ class System : public SystemI
     System();
 
   private:
+    std::shared_ptr<System> own_ptr;
+
     // global objects
     wayland::display_t     display;
     wayland::registry_t    registry;
