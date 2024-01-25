@@ -20,13 +20,13 @@ pkg_check_modules(sigc REQUIRED IMPORTED_TARGET sigc++-3.0)
 
 add_library(
 	cctk_utils
-	recursionGuard.cpp
-	# Property.cpp
+	PRIVATE
+	MemFD.cpp
 	)
 
-target_link_libraries(
-	cctk_utils 
-	)
+#target_link_libraries(
+#	cctk_utils 
+#	)
 
 target_include_directories(
 	cctk_utils 

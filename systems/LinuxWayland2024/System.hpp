@@ -1,5 +1,5 @@
-#ifndef WAYROUND_I2P_20240117_175210_699604
-#define WAYROUND_I2P_20240117_175210_699604
+#ifndef WAYROUND_I2P_20240125_022823_731674
+#define WAYROUND_I2P_20240125_022823_731674
 
 #include <memory>
 
@@ -18,6 +18,8 @@
 namespace wayround_i2p::cctk::system::linux_wayland_2024
 {
 
+class Window;
+
 class System : public SystemI
 {
   public:
@@ -34,6 +36,8 @@ class System : public SystemI
     System();
 
   private:
+    friend Window;
+
     std::shared_ptr<System> own_ptr;
 
     // global objects
@@ -45,21 +49,9 @@ class System : public SystemI
     wayland::seat_t        seat;
     wayland::shm_t         shm;
 
-    // local objects
-    wayland::surface_t       surface;
-    wayland::shell_surface_t shell_surface;
-    wayland::xdg_surface_t   xdg_surface;
-    wayland::xdg_toplevel_t  xdg_toplevel;
-    wayland::pointer_t       pointer;
-    wayland::keyboard_t      keyboard;
-    wayland::callback_t      frame_cb;
-    wayland::cursor_image_t  cursor_image;
-    wayland::buffer_t        cursor_buffer;
-    wayland::surface_t       cursor_surface;
-
     bool running;
-    bool has_pointer;
-    bool has_keyboard;
+    // bool has_pointer;
+    // bool has_keyboard;
 
     int wayland_init();
 };

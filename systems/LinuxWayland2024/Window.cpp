@@ -15,6 +15,28 @@ Window::Window(std::shared_ptr<System> sys) :
     position_(Property<wayround_i2p::cctk::Point2d>::create(position))
 {
     this->sys = sys;
+
+    surface = this->sys->compositor.create_surface();
+
+    if (!this->sys->xdg_wm_base)
+    {
+        throw std::runtime_error("no xdg_wm_base");
+    }
+
+    xdg_surface = this->sys->xdg_wm_base.get_xdg_surface(surface);
+
+    xdg_surface.on_configure() =
+        [&](uint32_t serial)
+    {
+        xdg_surface.ack_configure(serial);
+    };
+
+    xdg_toplevel = xdg_surface.get_toplevel();
+    xdg_toplevel.set_title("Window");
+
+    surface.commit();
+
+    // this->sys->display.roundtrip();
 }
 
 Window::~Window()

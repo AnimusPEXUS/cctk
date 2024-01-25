@@ -17,14 +17,16 @@ int main(int argc, char **args)
 
     cctk->init();
 
+    std::shared_ptr<wayround_i2p::cctk::WindowI> win;
+
     {
         auto x = cctk->get_sigAfterStart().lock();
         if (x)
         {
             x->connect(
-                [cctk]()
+                [cctk, &win]()
                 {
-                    auto win = cctk->createWindow();
+                    win = cctk->createWindow();
                     win->show();
                 }
             );

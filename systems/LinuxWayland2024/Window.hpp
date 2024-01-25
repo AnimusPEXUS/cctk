@@ -1,5 +1,5 @@
-#ifndef WAYROUND_I2P_20240117_175210_702645
-#define WAYROUND_I2P_20240117_175210_702645
+#ifndef WAYROUND_I2P_20240125_022823_732810
+#define WAYROUND_I2P_20240125_022823_732810
 
 #include <memory>
 
@@ -43,11 +43,23 @@ class Window : public WindowI
     std::shared_ptr<Window> own_ptr;
     std::shared_ptr<System> sys;
 
-    icu::UnicodeString          title;
-    wayround_i2p::cctk::Point2d position;
+    icu::UnicodeString title;
+    Point2d            position;
 
-    wayround_i2p::cctk::Property<icu::UnicodeString>          title_;
-    wayround_i2p::cctk::Property<wayround_i2p::cctk::Point2d> position_;
+    Property<icu::UnicodeString> title_;
+    Property<Point2d>            position_;
+
+    // local objects
+    wayland::surface_t       surface;
+    wayland::shell_surface_t shell_surface;
+    wayland::xdg_surface_t   xdg_surface;
+    wayland::xdg_toplevel_t  xdg_toplevel;
+    wayland::pointer_t       pointer;
+    wayland::keyboard_t      keyboard;
+    wayland::callback_t      frame_cb;
+    wayland::cursor_image_t  cursor_image;
+    wayland::buffer_t        cursor_buffer;
+    wayland::surface_t       cursor_surface;
 };
 
 } // namespace wayround_i2p::cctk::system::linux_wayland_2024
