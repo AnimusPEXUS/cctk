@@ -57,6 +57,8 @@ class Window : public WindowI
     Property<icu::UnicodeString> title_;
     Property<Point2d>            position_;
 
+    Property<bool> visible_;
+
     // local objects
     wayland::surface_t       surface;
     wayland::shell_surface_t shell_surface;

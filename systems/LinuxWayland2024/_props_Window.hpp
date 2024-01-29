@@ -62,3 +62,35 @@
         return this->position_.get();
         }
 
+
+
+    // CCTK Property Description File
+    // (Generated!: edit _props_Window.cctkpdf and rerun _props_regen.py)
+
+    bool p_Visible_isDefaultable()
+        {
+        return this->visible_.isDefaultable();
+        }
+
+    bool p_Visible_isUndefinable()
+        {
+        return this->visible_.isUndefinable();
+        }
+
+    bool p_Visible_isValid(const bool &value)
+        {
+        return this->visible_.isValid(value);
+        }
+
+
+
+    bool p_Visible_set(const bool &value)
+        {
+        return this->visible_.set(value);
+        }
+
+    bool    p_Visible_get()
+        {
+        return this->visible_.get();
+        }
+

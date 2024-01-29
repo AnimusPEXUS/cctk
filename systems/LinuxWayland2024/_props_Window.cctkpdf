@@ -10,3 +10,8 @@
       prop_funcs: s
       prop_type: Point2d
       prop_var_name: position_
+
+    - prop_name: Visible
+      prop_funcs: s
+      prop_type: bool
+      prop_var_name: visible_
