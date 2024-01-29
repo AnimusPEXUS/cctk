@@ -40,6 +40,7 @@ add_library(
 	System.cpp
 	Window.cpp
 	DrawingSurface.cpp
+        WaylandShmCtl.cpp
     )
 
 target_link_libraries(

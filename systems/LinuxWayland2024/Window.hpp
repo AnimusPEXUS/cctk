@@ -1,5 +1,5 @@
-#ifndef WAYROUND_I2P_20240125_022823_732810
-#define WAYROUND_I2P_20240125_022823_732810
+#ifndef WAYROUND_I2P_20240127_063832_812664
+#define WAYROUND_I2P_20240127_063832_812664
 
 #include <memory>
 
@@ -16,12 +16,20 @@
 
 #include "types/Point2d.hpp"
 
+// #include "utils/MemFD.hpp"
 #include "utils/Property.hpp"
 
-#include <systems/LinuxWayland2024/System.hpp>
+#include "systems/LinuxWayland2024/System.hpp"
+#include "systems/LinuxWayland2024/WaylandShmCtl.hpp"
 
 namespace wayround_i2p::cctk::system::linux_wayland_2024
 {
+
+struct WindowVideoConfig
+{
+    int32_t width;
+    int32_t height;
+};
 
 class System;
 
@@ -54,12 +62,18 @@ class Window : public WindowI
     wayland::shell_surface_t shell_surface;
     wayland::xdg_surface_t   xdg_surface;
     wayland::xdg_toplevel_t  xdg_toplevel;
-    wayland::pointer_t       pointer;
-    wayland::keyboard_t      keyboard;
+    // wayland::pointer_t       pointer;
+    // wayland::keyboard_t      keyboard;
     wayland::callback_t      frame_cb;
-    wayland::cursor_image_t  cursor_image;
-    wayland::buffer_t        cursor_buffer;
-    wayland::surface_t       cursor_surface;
+    // wayland::cursor_image_t  cursor_image;
+    // wayland::buffer_t        cursor_buffer;
+    // wayland::surface_t       cursor_surface;
+
+    WindowVideoConfig video_cfg;
+
+    WaylandShmCtl wsc;
+
+    int video_reconfig(WindowVideoConfig cfg);
 };
 
 } // namespace wayround_i2p::cctk::system::linux_wayland_2024

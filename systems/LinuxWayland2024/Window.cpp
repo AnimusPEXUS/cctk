@@ -12,7 +12,8 @@ std::shared_ptr<Window> Window::create(std::shared_ptr<System> sys)
 
 Window::Window(std::shared_ptr<System> sys) :
     title_(Property<icu::UnicodeString>::create(title)),
-    position_(Property<wayround_i2p::cctk::Point2d>::create(position))
+    position_(Property<wayround_i2p::cctk::Point2d>::create(position)),
+    wsc(sys->shm)
 {
     this->sys = sys;
 
@@ -28,6 +29,7 @@ Window::Window(std::shared_ptr<System> sys) :
     xdg_surface.on_configure() =
         [&](uint32_t serial)
     {
+        // todo: is this safe?
         xdg_surface.ack_configure(serial);
     };
 
@@ -45,6 +47,13 @@ Window::~Window()
 
 int Window::show()
 {
+    return 0;
+}
+
+int Window::video_reconfig(WindowVideoConfig cfg)
+{
+    wsc.applyCfg({640, 480, 4});
+    surface.attach(wsc.getBuffer(0), 0, 0);
     return 0;
 }
 

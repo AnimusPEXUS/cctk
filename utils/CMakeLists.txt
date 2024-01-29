@@ -20,8 +20,7 @@ pkg_check_modules(sigc REQUIRED IMPORTED_TARGET sigc++-3.0)
 
 add_library(
 	cctk_utils
-	PRIVATE
-	MemFD.cpp
+	INTERFACE
 	)
 
 #target_link_libraries(
@@ -30,7 +29,7 @@ add_library(
 
 target_include_directories(
 	cctk_utils 
-	PRIVATE 
+	INTERFACE 
 	${Boost_INCLUDE_DIRS}
 	${ICU_INCLUDE_DIRS}
 	${sigc_INCLUDE_DIRS}
