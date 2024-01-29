@@ -120,6 +120,11 @@ int WaylandShmCtl::getMemFD_fd()
     return memfd.get_fd();
 }
 
+const void *WaylandShmCtl::getMemFD_mem()
+{
+    return memfd.get_mem();
+}
+
 wayland::shm_pool_t WaylandShmCtl::getPool()
 {
     return pool;

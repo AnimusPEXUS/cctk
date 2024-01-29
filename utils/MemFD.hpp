@@ -24,7 +24,7 @@ class MemFD
 
     int get_fd();
 
-    const void *getMem();
+    const void *get_mem();
 
   private:
     T     size = 0;
@@ -140,7 +140,7 @@ int MemFD<T>::get_fd()
 }
 
 template <class T>
-const void *MemFD<T>::getMem()
+const void *MemFD<T>::get_mem()
 {
     return mem;
 }

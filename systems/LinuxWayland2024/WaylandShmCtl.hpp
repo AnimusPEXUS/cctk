@@ -99,12 +99,15 @@ class WaylandShmCtl
 
     int applyCfg(WaylandShmCtlCfg cfg);
 
-    int                 getMemFD_fd();
     wayland::shm_pool_t getPool();
     wayland::buffer_t   getBuffer(int index);
+    int                 getMemFD_fd();
+    const void         *getMemFD_mem();
 
     // gets corresponding values from config
     void getWidthHeight(int32_t &width, int32_t &height);
+
+    // todo: is explicit close/kill/terminate function required?
 
   private:
     wayland::shm_t shm;
